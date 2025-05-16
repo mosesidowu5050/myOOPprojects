@@ -2,32 +2,37 @@ package services;
 
 import data.model.Resident;
 import data.repository.ResidentRepository;
-import data.repository.Residents;
 import dtos.request.LoginServiceRequest;
 import dtos.request.ResidentServicesRequest;
+import dtos.responses.LoginServiceResponse;
 import dtos.responses.ResidentServicesResponse;
-import static utility.Mapper.map;
+import utils.Mapper;
+
+import java.util.Optional;
 
 public class ResidentServicesImpl implements ResidentServices {
 
-    private ResidentRepository residentRepository = new Residents();
+    private ResidentRepository residentRepository;
+
+    public ResidentServicesImpl(ResidentRepository residentRepository) {
+        this.residentRepository = residentRepository;
+        Mapper.setResidentRepository(residentRepository);
+    }
 
     @Override
     public ResidentServicesResponse register(ResidentServicesRequest residentServicesRequest) {
-        ResidentServicesResponse residentServicesResponse = new ResidentServicesResponse();
-        map(residentServicesRequest);
-
-        return residentServicesResponse;
+        return Mapper.map(residentServicesRequest);
     }
 
     @Override
-    public String login(LoginServiceRequest loginServiceRequest) {
-//        LoginServiceRequest loginRequest = new LoginServiceRequest();
-        Resident resident = new Resident();
+    public LoginServiceResponse login(LoginServiceRequest request) {
+        Optional<Resident> residentOpt = residentRepository.findById(request.getId());
 
-
-
-        return null;
+        if (residentOpt.isEmpty()) {
+            throw new RuntimeException("Invalid ID");
+        }
+        LoginServiceResponse response = new LoginServiceResponse();
+        response.setMessage("Login successful");
+        return response;
     }
-
 }

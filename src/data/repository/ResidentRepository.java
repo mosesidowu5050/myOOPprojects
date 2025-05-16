@@ -13,5 +13,6 @@ public interface ResidentRepository {
     List<Resident> findAll();
     long count();
     boolean existsById(long id);
+    boolean checkPassword(long password);
 
 }

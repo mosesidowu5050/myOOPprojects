@@ -12,7 +12,6 @@ public class Residents implements ResidentRepository {
     private List<Resident> residents = new ArrayList<>();
     private int residentCounter = 0;
 
-
     @Override
     public Resident save(Resident resident) {
         if(isNew(resident)) saveNew(resident); else update(resident);
@@ -38,6 +37,8 @@ public class Residents implements ResidentRepository {
         }
     }
 
+
+
     private long generateId() {
         return ++residentCounter;
     }
@@ -54,20 +55,16 @@ public class Residents implements ResidentRepository {
 
     @Override
     public Optional<Resident> findById(long id) {
-        for (Resident resident : residents) {
-            if (resident.getId() == id) {
-                return Optional.of(resident);
-            }
-        }
-        return Optional.empty();
+        return residents.stream()
+                .filter(resident -> resident.getId() == id)
+                .findFirst();
     }
 
     @Override
     public List<Resident> findByFullName(String fullName) {
-        residents.stream().
-                filter(resident -> resident.getFullName().equals(fullName)).
-                collect(Collectors.toList());
-        return residents;
+        return residents.stream()
+                .filter(resident -> resident.getFullName().equals(fullName))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -83,5 +80,16 @@ public class Residents implements ResidentRepository {
     @Override
     public boolean existsById(long id) {
         return findById(id).isPresent();
+    }
+
+    @Override
+    public boolean checkPassword(long password) {
+        for (Resident resident : residents) {
+            if (resident.getId() == password) {
+                resident.setId(password);
+                return true;
+            }
+        }
+        return false;
     }
 }
