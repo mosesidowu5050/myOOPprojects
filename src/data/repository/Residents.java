@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 
 public class Residents implements ResidentRepository {
 
-    private List<Resident> residents = new ArrayList<>();
-    private int residentCounter = 0;
+    private static int residentCounter = 0;
+    private static List<Resident> residents = new ArrayList<>();
 
     @Override
     public Resident save(Resident resident) {
@@ -80,6 +80,16 @@ public class Residents implements ResidentRepository {
     @Override
     public boolean existsById(long id) {
         return findById(id).isPresent();
+    }
+
+    @Override
+    public Optional<Resident> findResidentByPhoneNumber(String phoneNumber) {
+        for (Resident resident : residents) {
+            if (resident.getPhoneNumber().equals(phoneNumber)) {
+                return Optional.of(resident);
+            }
+        }
+        return Optional.empty();
     }
 
     @Override

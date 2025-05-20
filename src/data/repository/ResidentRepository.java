@@ -13,6 +13,7 @@ public interface ResidentRepository {
     List<Resident> findAll();
     long count();
     boolean existsById(long id);
+    Optional<Resident> findResidentByPhoneNumber(String name);
     boolean checkPassword(long password);
 
 }

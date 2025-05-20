@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/LayeredResident.iml" filepath="$PROJECT_DIR$/LayeredResident.iml" />
-=======
-<<<<<<< HEAD
-      <module fileurl="file://$PROJECT_DIR$/LayeredGatePass.iml" filepath="$PROJECT_DIR$/LayeredGatePass.iml" />
-=======
-      <module fileurl="file://$PROJECT_DIR$/OOpJavaProjects.iml" filepath="$PROJECT_DIR$/OOpJavaProjects.iml" />
->>>>>>> 42f59dec9f15587726bd3ad12535d11f702334ea
->>>>>>> 5bbb96ef36cd5062882ccfd6b16a7ac1c905d504
     </modules>
   </component>
 </project>

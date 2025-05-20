@@ -137,7 +137,7 @@ public class ResidentsTest {
         residents.save(secondResidents);
         secondResidents.setFullName("MD Empire");
         assertEquals(2, residents.count());
-        assertEquals("MD Empire", residents.findByFullName("MD Empire").get(1).getFullName());
+        assertEquals("MD Empire", residents.findByFullName("MD Empire").get(0).getFullName());
     }
 
     @Test

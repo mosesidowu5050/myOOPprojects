@@ -5,16 +5,14 @@ import data.repository.ResidentRepository;
 import data.repository.Residents;
 import dtos.request.LoginServiceRequest;
 import dtos.request.ResidentServicesRequest;
+import dtos.responses.LoginServiceResponse;
 import dtos.responses.ResidentServicesResponse;
+
+import java.util.Optional;
 
 public class Mapper {
 
-
-    private static ResidentRepository residentRepository;
-
-    public static void setResidentRepository(ResidentRepository repository) {
-        residentRepository = repository;
-    }
+    private static ResidentRepository residentRepository = new Residents();
 
     public static ResidentServicesResponse map(ResidentServicesRequest request) {
         Resident resident = new Resident();
@@ -30,6 +28,18 @@ public class Mapper {
         response.setEmail(savedResident.getPhoneNumber());
         response.setAddress(savedResident.getHomeAddress());
 
+        return response;
+    }
+
+    public static LoginServiceResponse loginMap(LoginServiceRequest loginServiceRequest) {
+        Optional<Resident> confirmResidentID = residentRepository.findById(loginServiceRequest.getId());
+        Optional<Resident> confirmResidentPhoneNumber = residentRepository.findResidentByPhoneNumber(loginServiceRequest.getPhoneNumber());
+
+        if (confirmResidentID.isEmpty() || confirmResidentPhoneNumber.isEmpty()) {
+            throw new RuntimeException("Invalid Id or Phone Number");
+        }
+        LoginServiceResponse response = new LoginServiceResponse();
+        response.setMessage("Login successful");
         return response;
     }
 }
