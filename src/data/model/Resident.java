@@ -6,7 +6,7 @@ public class Resident {
     private String homeAddress;
     private String phoneNumber;
     private Visitor visitor;
-    private AccessCode accessCode;
+    private AccessToken accessCode;
 
 
     public Resident() {
@@ -16,11 +16,11 @@ public class Resident {
         this.phoneNumber = phoneNumber;
     }
 
-    public AccessCode getAccessCode() {
+    public AccessToken getAccessCode() {
         return accessCode;
     }
 
-    public void setAccessCode(AccessCode accessCode) {
+    public void setAccessCode(AccessToken accessCode) {
         this.accessCode = accessCode;
     }
 

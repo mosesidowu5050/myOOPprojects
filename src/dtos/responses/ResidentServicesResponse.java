@@ -42,13 +42,8 @@ public class ResidentServicesResponse {
         this.address = address;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ResidentServicesResponse residentServicesResponse)) return false;
-        return id == residentServicesResponse.id && Objects.equals(fullName, residentServicesResponse.fullName)
-                && Objects.equals(email, residentServicesResponse.email)
-                && Objects.equals(address, residentServicesResponse.address);
+    public String getMessage() {
+        return "Phone number already exist";
     }
 
 }

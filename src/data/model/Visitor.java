@@ -5,11 +5,8 @@ public class Visitor {
     private String fullName;
     private String homeAddress;
     private String phoneNumber;
-    private Resident resident;
 
-    public Visitor(String fullName, String phoneNumber) {
-        this.fullName = fullName;
-        this.phoneNumber = phoneNumber;
+    public Visitor() {
     }
 
     public long getId() {
@@ -23,11 +20,13 @@ public class Visitor {
     public String getFullName() {
         return fullName;
     }
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
     public String getHomeAddress() {
         return homeAddress;
     }
-
     public void setHomeAddress(String homeAddress) {
         this.homeAddress = homeAddress;
     }
@@ -35,13 +34,7 @@ public class Visitor {
     public String getPhoneNumber() {
         return phoneNumber;
     }
-
-    public Resident getResident() {
-        return resident;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
-
-    public void setResident(Resident resident) {
-        this.resident = resident;
-    }
-
 }

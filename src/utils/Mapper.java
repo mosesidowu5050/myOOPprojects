@@ -20,6 +20,7 @@ public class Mapper {
         resident.setHomeAddress(request.getHomeAddress());
         resident.setPhoneNumber(request.getPhoneNumber());
 
+        isNotValidPhoneNumber(request);
         Resident savedResident = residentRepository.save(resident);
 
         ResidentServicesResponse response = new ResidentServicesResponse();
@@ -29,7 +30,7 @@ public class Mapper {
         response.setAddress(savedResident.getHomeAddress());
 
         return response;
-    }
+    } 
 
     public static LoginServiceResponse loginMap(LoginServiceRequest loginServiceRequest) {
         Optional<Resident> confirmResidentID = residentRepository.findById(loginServiceRequest.getId());
@@ -42,4 +43,11 @@ public class Mapper {
         response.setMessage("Login successful");
         return response;
     }
+
+    private static void isNotValidPhoneNumber(ResidentServicesRequest residentServicesRequest) {
+        boolean phoneNumberExist = residentRepository.confirmPhoneNumber(residentServicesRequest.getPhoneNumber());
+        if (phoneNumberExist) throw new IllegalArgumentException("Phone number already exist");
+    }
+
+
 }

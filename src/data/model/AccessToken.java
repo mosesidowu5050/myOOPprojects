@@ -2,13 +2,14 @@ package data.model;
 import java.time.LocalDateTime;
 
 
-public class AccessCode {
+public class AccessToken {
     private int id;
     private String otpCode;
     private LocalDateTime otpCreatedOn = LocalDateTime.now();
-    private LocalDateTime otpExpiredOn;
+    private LocalDateTime otpExpiredDate;
+    private Visitor visitor;
 
-    public AccessCode() {
+    public AccessToken() {
     }
 
     public int getId() {
@@ -19,7 +20,7 @@ public class AccessCode {
         this.id = id;
     }
 
-    public String getOtpCode() {
+    public String receiveAccessToken() {
         return otpCode;
     }
 
@@ -32,11 +33,25 @@ public class AccessCode {
     }
 
     public LocalDateTime getOtpExpiredOn() {
-        return otpExpiredOn;
+        return otpExpiredDate;
     }
 
     public void setOtpExpiredOn(LocalDateTime otpExpiredOn) {
-        this.otpExpiredOn = otpExpiredOn;
+        this.otpExpiredDate = otpExpiredOn;
     }
 
+    public void setVisitor(Visitor visitor) {
+        this.visitor = visitor;
+    }
+
+    @Override
+    public String toString() {
+        return "AccessToken{" +
+                "id=" + id +
+                ", otpCode='" + otpCode + '\'' +
+                ", otpCreatedOn=" + otpCreatedOn +
+                ", otpExpiredDate=" + otpExpiredDate +
+                ", visitor=" + visitor +
+                '}';
+    }
 }

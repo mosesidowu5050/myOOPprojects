@@ -102,4 +102,14 @@ public class Residents implements ResidentRepository {
         }
         return false;
     }
+
+    @Override
+    public boolean confirmPhoneNumber(String phoneNumber) {
+        for (Resident resident : residents) {
+            if (resident.getPhoneNumber().contains(phoneNumber)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
