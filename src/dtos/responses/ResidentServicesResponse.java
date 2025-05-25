@@ -1,12 +1,10 @@
 package dtos.responses;
 
-import java.util.Objects;
-
 public class ResidentServicesResponse {
 
     private long id;
     private String fullName;
-    private String email;
+    private String phoneNumber;
     private String address;
 
 
@@ -26,12 +24,12 @@ public class ResidentServicesResponse {
         this.fullName = fullName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getAddress() {

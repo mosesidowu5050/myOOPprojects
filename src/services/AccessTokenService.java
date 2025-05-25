@@ -1,9 +1,10 @@
 package services;
 
 import data.model.AccessToken;
+import data.model.Visitor;
 
 public interface AccessTokenService {
 
-    AccessToken generateAccessToken(AccessToken accessToken);
+    AccessToken generateAccessToken(Visitor visitor);
 
 }

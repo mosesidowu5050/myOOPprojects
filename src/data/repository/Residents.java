@@ -83,13 +83,13 @@ public class Residents implements ResidentRepository {
     }
 
     @Override
-    public Optional<Resident> findResidentByPhoneNumber(String phoneNumber) {
+    public Resident findResidentByPhoneNumber(String phoneNumber) {
         for (Resident resident : residents) {
             if (resident.getPhoneNumber().equals(phoneNumber)) {
-                return Optional.of(resident);
+                return resident;
             }
         }
-        return Optional.empty();
+        return null;
     }
 
     @Override

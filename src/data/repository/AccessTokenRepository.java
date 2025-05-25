@@ -2,7 +2,6 @@ package data.repository;
 
 import data.model.AccessToken;
 
-import java.util.List;
 
 public interface AccessTokenRepository {
 

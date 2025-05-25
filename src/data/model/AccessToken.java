@@ -7,6 +7,7 @@ public class AccessToken {
     private String otpCode;
     private LocalDateTime otpCreatedOn = LocalDateTime.now();
     private LocalDateTime otpExpiredDate;
+    private Resident resident;
     private Visitor visitor;
 
     public AccessToken() {
@@ -27,6 +28,9 @@ public class AccessToken {
     public void setOtpCode(String otpCode) {
         this.otpCode = otpCode;
     }
+    public String getOtpCode() {
+        return otpCode;
+    }
 
     public LocalDateTime getOtpCreatedOn() {
         return otpCreatedOn;
@@ -43,15 +47,13 @@ public class AccessToken {
     public void setVisitor(Visitor visitor) {
         this.visitor = visitor;
     }
-
-    @Override
-    public String toString() {
-        return "AccessToken{" +
-                "id=" + id +
-                ", otpCode='" + otpCode + '\'' +
-                ", otpCreatedOn=" + otpCreatedOn +
-                ", otpExpiredDate=" + otpExpiredDate +
-                ", visitor=" + visitor +
-                '}';
+    public Visitor getVisitor() {
+        return visitor;
+    }
+    public void setResident(Resident resident) {
+        this.resident = resident;
+    }
+    public Resident getResident() {
+        return resident;
     }
 }

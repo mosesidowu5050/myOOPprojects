@@ -5,6 +5,7 @@ public class Visitor {
     private String fullName;
     private String homeAddress;
     private String phoneNumber;
+    private Resident resident;
 
     public Visitor() {
     }
