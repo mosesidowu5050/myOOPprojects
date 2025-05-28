@@ -29,4 +29,9 @@ public class Visitors implements VisitorRepository {
     public List<Visitor> getVisitors() {
         return visitors;
     }
+
+    @Override
+    public long count() {
+        return visitors.size();
+    }
 }

@@ -29,14 +29,13 @@ public class Residents implements ResidentRepository {
     }
 
     private void update(Resident resident) {
-        for (int i = 0; i < residents.size(); i++) {
-            if (residents.get(i).getId() == resident.getId()) {
-                residents.set(i, resident);
+        for (int count = 0; count < residents.size(); count++) {
+            if (residents.get(count).getId() == resident.getId()) {
+                residents.set(count, resident);
                 return;
             }
         }
     }
-
 
 
     private long generateId() {
@@ -111,5 +110,10 @@ public class Residents implements ResidentRepository {
             }
         }
         return false;
+    }
+
+    public static void clear() {
+        residents.clear();
+        residentCounter = 0;
     }
 }

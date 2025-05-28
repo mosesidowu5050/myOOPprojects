@@ -5,6 +5,7 @@ public class Visitor {
     private String fullName;
     private String homeAddress;
     private String phoneNumber;
+    private String accessToken;
     private Resident resident;
 
     public Visitor() {
@@ -37,5 +38,13 @@ public class Visitor {
     }
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String receiveAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 }

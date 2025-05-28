@@ -1,10 +1,13 @@
 package dtos.request;
 
-public class VisitorRequest {
+import java.time.LocalDateTime;
+
+public class VisitorInformationRequest {
 
     private String fullName;
     private String phoneNumber;
     private String homeAddress;
+    private LocalDateTime otpExpiryDate;
 
     public String getFullName() {
         return fullName;
@@ -28,5 +31,13 @@ public class VisitorRequest {
 
     public void setHomeAddress(String homeAddress) {
         this.homeAddress = homeAddress;
+    }
+
+    public LocalDateTime getOtpExpiryDate() {
+        return otpExpiryDate;
+    }
+
+    public void setOtpExpiryDate(LocalDateTime otpExpiryDate) {
+        this.otpExpiryDate = otpExpiryDate;
     }
 }

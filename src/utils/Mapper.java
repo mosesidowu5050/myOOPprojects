@@ -6,7 +6,7 @@ import data.model.Visitor;
 import data.repository.*;
 import dtos.request.LoginServiceRequest;
 import dtos.request.ResidentServicesRequest;
-import dtos.request.VisitorRequest;
+import dtos.request.VisitorInformationRequest;
 import dtos.responses.LoginServiceResponse;
 import dtos.responses.ResidentServicesResponse;
 import services.AccessTokenImpl;
@@ -42,7 +42,6 @@ public class Mapper {
     }
 
 
-
     public static LoginServiceResponse loginMap(LoginServiceRequest loginServiceRequest) {
         Optional<Resident>confirmResidentID = residentRepository.findById(loginServiceRequest.getId());
         Resident confirmResidentPhoneNumber = residentRepository.findResidentByPhoneNumber(loginServiceRequest.getPhoneNumber());
@@ -56,9 +55,8 @@ public class Mapper {
     }
 
 
-    public static AccessToken map(Long residentId, VisitorRequest visitorRequest) {
-        Resident resident = residentRepository.findById(residentId)
-                .orElseThrow(() -> new IllegalArgumentException("Resident not found"));
+    public static AccessToken map(Long residentId, VisitorInformationRequest visitorRequest) {
+        Resident resident = validateResidentId(residentId);
 
         Visitor visitor = new Visitor();
         visitor.setFullName(visitorRequest.getFullName());
@@ -68,9 +66,17 @@ public class Mapper {
 
         AccessToken token = accessTokenService.generateAccessToken(visitor);
         token.setResident(resident);
-        token.setOtpCode(token.getOtpCode());
         token.setVisitor(visitor);
+        token.setOtpCode(token.getOtpCode());
+        token.setOtpCreatedOn(token.getOtpCreatedOn());
+        token.setOtpExpiredDate(visitorRequest.getOtpExpiryDate());
+
         return token;
+    }
+
+    private static Resident validateResidentId(Long residentId) {
+        return residentRepository.findById(residentId)
+               .orElseThrow(() -> new IllegalArgumentException("Resident not found"));
     }
 
     private static void verifyPhoneNumber(ResidentServicesRequest residentServicesRequest) {

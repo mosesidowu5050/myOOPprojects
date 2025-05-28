@@ -9,5 +9,6 @@ public interface VisitorRepository {
     Visitor save(Visitor visitor);
     Visitor getVisitorByName(String name);
     List<Visitor> getVisitors();
+    long count();
 
 }

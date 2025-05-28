@@ -1,12 +1,10 @@
 package services;
 
 import data.model.AccessToken;
-import data.model.Resident;
-import data.model.Visitor;
 import data.repository.*;
 import dtos.request.LoginServiceRequest;
 import dtos.request.ResidentServicesRequest;
-import dtos.request.VisitorRequest;
+import dtos.request.VisitorInformationRequest;
 import dtos.responses.LoginServiceResponse;
 import dtos.responses.ResidentServicesResponse;
 
@@ -36,7 +34,7 @@ public class ResidentServicesImpl implements ResidentServices {
     }
 
     @Override
-    public AccessToken inviteVisitorAndGenerateToken(Long residentId, VisitorRequest visitorRequest) {
+    public AccessToken inviteVisitorAndGenerateToken(Long residentId, VisitorInformationRequest visitorRequest) {
         return map(residentId, visitorRequest);
     }
 

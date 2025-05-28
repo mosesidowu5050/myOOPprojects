@@ -2,12 +2,11 @@ package services;
 
 import data.model.AccessToken;
 import data.model.Resident;
-import data.model.Visitor;
 import data.repository.ResidentRepository;
 import data.repository.Residents;
 import dtos.request.LoginServiceRequest;
 import dtos.request.ResidentServicesRequest;
-import dtos.request.VisitorRequest;
+import dtos.request.VisitorInformationRequest;
 import dtos.responses.LoginServiceResponse;
 import dtos.responses.ResidentServicesResponse;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 
 import static org.junit.jupiter.api.Assertions.*;
-import static utils.Mapper.loginMap;
 
 class ResidentServicesImplTest {
 
@@ -30,6 +28,7 @@ class ResidentServicesImplTest {
         residentServices = new ResidentServicesImpl(residentRepository);
         registerRequest = new ResidentServicesRequest();
         loginRequest = new LoginServiceRequest();
+        Residents.clear();
     }
 
     @Test
@@ -138,6 +137,27 @@ class ResidentServicesImplTest {
     }
 
     @Test
+    public void testRegister_loginResident_withInvalidResidentId_andPhoneNumber_throwException() {
+        registerRequest.setFullName("Moses Idowu");
+        registerRequest.setHomeAddress("Lagos");
+        registerRequest.setPhoneNumber("0704445566");
+        residentServices.register(registerRequest);
+        assertEquals(1, residentRepository.count());
+
+        Resident resident = residentRepository.findResidentByPhoneNumber("0704445566");
+        assertNotNull(resident);
+        Long residentId = resident.getId();
+
+        LoginServiceRequest loginRequest = new LoginServiceRequest();
+        loginRequest.setId(2);
+        loginRequest.setPhoneNumber("10704445566");
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            residentServices.login(loginRequest);
+        });
+        assertEquals("Invalid Id or Phone Number", exception.getMessage());
+    }
+
+    @Test
     void testRegisterResident_loginResident_residentInviteVisitor_residentGenerateAccessToken(){
         registerRequest.setFullName("Moses Idowu");
         registerRequest.setHomeAddress("Lagos");
@@ -149,7 +169,13 @@ class ResidentServicesImplTest {
         assertNotNull(resident);
         Long residentId = resident.getId();
 
-        VisitorRequest visitorRequest = new VisitorRequest();
+        LoginServiceRequest loginRequest = new LoginServiceRequest();
+        loginRequest.setId(residentId);
+        loginRequest.setPhoneNumber(resident.getPhoneNumber());
+        LoginServiceResponse response = residentServices.login(loginRequest);
+        assertEquals("Login successful", response.getMessage());
+
+        VisitorInformationRequest visitorRequest = new VisitorInformationRequest();
         visitorRequest.setFullName("Majek Olamilekan");
         visitorRequest.setPhoneNumber("0704445523");
         visitorRequest.setHomeAddress("Lagos");
@@ -160,7 +186,7 @@ class ResidentServicesImplTest {
         assertEquals("0704445523", token.getVisitor().getPhoneNumber());
         assertEquals("Lagos", token.getVisitor().getHomeAddress());
         assertEquals(residentId, token.getResident().getId());
-
-
     }
+
+
 }

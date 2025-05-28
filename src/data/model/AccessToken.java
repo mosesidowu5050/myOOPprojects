@@ -32,6 +32,14 @@ public class AccessToken {
         return otpCode;
     }
 
+    public void setOtpCreatedOn(LocalDateTime otpCreatedOn) {
+        this.otpCreatedOn = otpCreatedOn;
+    }
+
+    public void setOtpExpiredDate(LocalDateTime otpExpiredDate) {
+        this.otpExpiredDate = otpExpiredDate;
+    }
+
     public LocalDateTime getOtpCreatedOn() {
         return otpCreatedOn;
     }
