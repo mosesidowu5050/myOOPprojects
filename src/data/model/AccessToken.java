@@ -3,7 +3,7 @@ import java.time.LocalDateTime;
 
 
 public class AccessToken {
-    private int id;
+    private long id;
     private String otpCode;
     private LocalDateTime otpCreatedOn = LocalDateTime.now();
     private LocalDateTime otpExpiredDate;
@@ -13,11 +13,11 @@ public class AccessToken {
     public AccessToken() {
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -15,9 +15,10 @@ public class AccessTokenImpl implements AccessTokenService {
     public AccessToken generateAccessToken(Visitor visitor) {
             Random random = new Random();
             AccessToken accessToken = new AccessToken();
-            int randomNumber = random.nextInt(1000);
+            int randomNumber = random.nextInt(9999999);
             String generateOtp = String.format("%04d", randomNumber);
             accessToken.setOtpCode(generateOtp);
+
             AccessToken otp = accessTokenRepository.save(accessToken);
 
             return otp;

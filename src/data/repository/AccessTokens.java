@@ -13,14 +13,16 @@ public class AccessTokens implements AccessTokenRepository {
 
     @Override
     public AccessToken save(AccessToken accessToken) {
+        accessToken.setId(getTokenId());
         accessTokens.add(accessToken);
         return accessToken;
     }
 
+
     @Override
-    public AccessToken findAccessToken(String accessToken) {
+    public AccessToken validateAccessToken(String otpCode) {
         for (AccessToken token : accessTokens) {
-            if (token.receiveAccessToken().equals(accessToken)) {
+            if (token.getOtpCode().equals(otpCode)) {
                 return token;
             }
         }
@@ -28,7 +30,12 @@ public class AccessTokens implements AccessTokenRepository {
     }
 
     @Override
-    public AccessToken validateAccessToken(AccessToken accessToken) {
+    public AccessToken findAccessTokenById(long id) {
+        for (AccessToken token : accessTokens) {
+            if (token.getId() == id) {
+                return token;
+            }
+        }
         return null;
     }
 
@@ -40,5 +47,24 @@ public class AccessTokens implements AccessTokenRepository {
     @Override
     public long count() {
         return accessTokens.size();
+    }
+
+    @Override
+    public void deleteById(long id) {
+        for(AccessToken token : accessTokens) {
+            if (token.getId() == id) {
+                accessTokens.remove(token);
+                break;
+            }
+        }
+    }
+
+    public long getTokenId(){
+        return ++tokenCounter;
+    }
+
+    public void deleteAll(){
+        accessTokens.clear();
+        tokenCounter = 0;
     }
 }
